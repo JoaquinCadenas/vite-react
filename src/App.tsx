@@ -15,8 +15,12 @@ function App() {
       const { data, error } = await supabase.from('usuarios').select('*');
       if (error) throw error;
       setData(data);
-    } catch (error) {
-      console.error('Error fetching data:', error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);  // Ahora puedes acceder a 'message' sin problemas
+      } else {
+        console.error('Error desconocido');
+      }
     } finally {
       setLoading(false);
     }
@@ -33,8 +37,12 @@ function App() {
       if (error) throw error;
       setData((prevData) => [...prevData, ...data]);
       setNewRecord({ nombre: '', email: '' });  // Limpiar el formulario
-    } catch (error) {
-      console.error('Error creando registro:', error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);  // Ahora puedes acceder a 'message' sin problemas
+      } else {
+        console.error('Error desconocido');
+      }
     }
   };
 
@@ -66,8 +74,12 @@ function App() {
       // Resetear el estado de edición
       setEditing(false);
       setCurrentRecord({ id: null, nombre: '', email: '' });
-    } catch (error) {
-      console.error('Error actualizando registro:', error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);  // Ahora puedes acceder a 'message' sin problemas
+      } else {
+        console.error('Error desconocido');
+      }
     }
   };
 
@@ -82,8 +94,12 @@ function App() {
       if (error) throw error;
 
       setData((prevData) => prevData.filter((item) => item.id !== id));
-    } catch (error) {
-      console.error('Error eliminando registro:', error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);  // Ahora puedes acceder a 'message' sin problemas
+      } else {
+        console.error('Error desconocido');
+      }
     }
   };
 
