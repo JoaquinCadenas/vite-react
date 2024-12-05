@@ -15,7 +15,7 @@ function App() {
       const { data, error } = await supabase.from('usuarios').select('*');
       if (error) throw error;
       setData(data);
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);  // Ahora puedes acceder a 'message' sin problemas
       } else {
@@ -37,7 +37,7 @@ function App() {
       if (error) throw error;
       setData((prevData) => [...prevData, ...data]);
       setNewRecord({ nombre: '', email: '' });  // Limpiar el formulario
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);  // Ahora puedes acceder a 'message' sin problemas
       } else {
@@ -74,7 +74,7 @@ function App() {
       // Resetear el estado de edición
       setEditing(false);
       setCurrentRecord({ id: null, nombre: '', email: '' });
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);  // Ahora puedes acceder a 'message' sin problemas
       } else {
@@ -94,7 +94,7 @@ function App() {
       if (error) throw error;
 
       setData((prevData) => prevData.filter((item) => item.id !== id));
-    } catch (error: unknown) {
+    } catch (error) {
       if (error instanceof Error) {
         console.error(error.message);  // Ahora puedes acceder a 'message' sin problemas
       } else {
